@@ -1,0 +1,108 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+typedef struct {
+    int* array;
+    int size;
+    int capacity;
+} DynamicArray;
+
+DynamicArray* createDynamicArray(int capacity) {
+    DynamicArray* dynArray = (DynamicArray*)malloc(sizeof(DynamicArray));
+    dynArray->array = (int*)malloc(capacity * sizeof(int));
+    dynArray->size = 0;
+    dynArray->capacity = capacity;
+    return dynArray;
+}
+
+void destroyDynamicArray(DynamicArray* dynArray) {
+    free(dynArray->array);
+    free(dynArray);
+}
+
+void pushBack(DynamicArray* dynArray, int element) {
+    if (dynArray->size == dynArray->capacity) {
+        int newCapacity = dynArray->capacity * 2;
+        int* newArray = (int*)realloc(dynArray->array, newCapacity * sizeof(int));
+        if (newArray == NULL) {
+            printf("Failed to resize the dynamic array.\n");
+            return;
+        }
+        dynArray->array = newArray;
+        dynArray->capacity = newCapacity;
+    }
+    dynArray->array[dynArray->size++] = element;
+}
+
+void insert(DynamicArray* dynArray, int element, int index) {
+    if (index >= 0 && index <= dynArray->size) {
+        if (dynArray->size == dynArray->capacity) {
+            int newCapacity = dynArray->capacity * 2;
+            int* newArray = (int*)realloc(dynArray->array, newCapacity * sizeof(int));
+            if (newArray == NULL) {
+                printf("Failed to resize the dynamic array.\n");
+                return;
+            }
+            dynArray->array = newArray;
+            dynArray->capacity = newCapacity;
+        }
+        for (int i = dynArray->size; i > index; i--) {
+            dynArray->array[i] = dynArray->array[i - 1];
+        }
+        dynArray->array[index] = element;
+        dynArray->size++;
+    } else {
+        printf("Invalid index.\n");
+    }
+}
+
+void reserve(DynamicArray* dynArray, int newCapacity) {
+    if (newCapacity > dynArray->capacity) {
+        int* newArray = (int*)realloc(dynArray->array, newCapacity * sizeof(int));
+        if (newArray == NULL) {
+            printf("Failed to resize the dynamic array.\n");
+            return;
+        }
+        dynArray->array = newArray;
+        dynArray->capacity = newCapacity;
+    }
+}
+
+int at(DynamicArray* dynArray, int index) {
+    if (index >= 0 && index < dynArray->size) {
+        return dynArray->array[index];
+    }
+    printf("Invalid index.\n");
+    return -1; // Return a sentinel value or handle the error as per your requirement
+}
+
+int size(DynamicArray* dynArray) {
+    return dynArray->size;
+}
+
+int empty(DynamicArray* dynArray) {
+    return dynArray->size == 0;
+}
+
+int capacity(DynamicArray* dynArray) {
+    return dynArray->capacity;
+}
+
+int main() {
+    DynamicArray* dynArray = createDynamicArray(5);
+
+    pushBack(dynArray, 40);
+    pushBack(dynArray, 30);
+    pushBack(dynArray, 60);
+
+    insert(dynArray, 15, 2);
+
+    printf("Element at index 1: %d\n", at(dynArray, 1));
+    printf("Size: %d\n", size(dynArray));
+    printf("Empty: %s\n", empty(dynArray) ? "Yes" : "No");
+    printf("Capacity: %d\n", capacity(dynArray));
+
+    destroyDynamicArray(dynArray);
+
+    return 0;
+}
