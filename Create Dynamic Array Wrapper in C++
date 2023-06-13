@@ -1,0 +1,116 @@
+#include <iostream>
+
+class DynamicArray {
+private:
+    int* array;
+    int size;
+    int capacity;
+
+public:
+    DynamicArray(int capacity) : size(0), capacity(capacity) {
+        array = new int[capacity];
+    }
+
+    ~DynamicArray() {
+        delete[] array;
+    }
+
+    void pushBack(int element) {
+        if (size == capacity) {
+            int newCapacity = capacity * 2;
+            int* newArray = new int[newCapacity];
+            for (int i = 0; i < size; i++) {
+                newArray[i] = array[i];
+            }
+            delete[] array;
+            array = newArray;
+            capacity = newCapacity;
+        }
+        array[size++] = element;
+    }
+
+    void insert(int element, int index) {
+        if (index >= 0 && index <= size) {
+            if (size == capacity) {
+                int newCapacity = capacity * 2;
+                int* newArray = new int[newCapacity];
+                for (int i = 0; i < index; i++) {
+                    newArray[i] = array[i];
+                }
+                newArray[index] = element;
+                for (int i = index; i < size; i++) {
+                    newArray[i + 1] = array[i];
+                }
+                delete[] array;
+                array = newArray;
+                capacity = newCapacity;
+                size++;
+            } else {
+                for (int i = size - 1; i >= index; i--) {
+                    array[i + 1] = array[i];
+                }
+                array[index] = element;
+                size++;
+            }
+        } else {
+            std::cout << "Invalid index." << std::endl;
+        }
+    }
+
+    void reserve(int newCapacity) {
+        if (newCapacity > capacity) {
+            int* newArray = new int[newCapacity];
+            for (int i = 0; i < size; i++) {
+                newArray[i] = array[i];
+            }
+            delete[] array;
+            array = newArray;
+            capacity = newCapacity;
+        }
+    }
+
+    int& at(int index) {
+        if (index >= 0 && index < size) {
+            return array[index];
+        }
+        throw std::out_of_range("Invalid index.");
+    }
+
+    int getSize() const {
+        return size;
+    }
+
+    bool isEmpty() const {
+        return size == 0;
+    }
+
+    int getCapacity() const {
+        return capacity;
+    }
+
+    int& operator[](int index) {
+        return array[index];
+    }
+};
+
+int main() {
+    DynamicArray dynArray(5);
+
+    dynArray.pushBack(10);
+    dynArray.pushBack(20);
+    dynArray.pushBack(30);
+
+    dynArray.insert(15, 1);
+    
+    std::cout << "Element at index 1: " << dynArray.at(1) << std::endl;
+    std::cout << "Size: " << dynArray.getSize() << std::endl;
+    std::cout << "Empty: " << (dynArray.isEmpty() ? "Yes" : "No") << std::endl;
+    std::cout << "Capacity: " << dynArray.getCapacity() << std::endl;
+
+
+    dynArray[2] = 25;  
+
+    std::cout << "Element at index 2: " << dynArray[3] << std::endl;
+
+    return 0;
+}
