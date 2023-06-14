@@ -1,0 +1,624 @@
+// #include <stdio.h>
+// #include <stdlib.h>
+​
+// int* ConcatArrays(int* arr1,int size1,int* arr2,int size2){
+//     int* result=(int*)malloc((size1+size2)*sizeof(int));
+​
+//     if (result==NULL){
+//         printf("Memory Allocation is Failed .\n");
+//         return NULL;
+//     }
+//     for(int i=0;i<size1;i++){
+//         result[i]=arr1[i];
+//     }
+//     for(int i=0;i<size2;i++){
+//         result[size1+i]=arr2[i];
+//     }
+//     return result;
+// }
+​
+//     void printArray(int* arr,int size){
+//         for (int i=0;i<size;i++){
+//             printf("%d",arr[i]);
+//         }
+//         printf("\n");
+// }
+​
+//     int main(){
+//         int arr1[]={1,2,3,4};
+//         int size1=sizeof(arr1)/sizeof(arr1[0]);
+​
+//         int arr2[]={1,2,3,4,5};
+//         int size2=sizeof(arr2)/sizeof(arr2[0]);
+​
+//         int* result = ConcatArrays(arr1,size1,arr2,size2);
+//         int resultsize=size1+size2;
+​
+//         printf("Result Array : ");
+//         printArray(result,resultsize);
+​
+//         free(result);
+//         return 0;
+​
+//     }
+​
+​
+// #include <stdio.h>
+// #include <stdbool.h>
+​
+// typedef bool (*predicateFn)(int);
+​
+// bool every(int* arr, int size, predicateFn predicate) {
+//     for (int i = 0; i < size; i++) {
+//         if (!predicate(arr[i])) {
+//             return false;
+//         }
+//     }
+//     return true;
+// }
+​
+// bool isEven(int num) {
+//     return num % 2 == 0;
+// }
+​
+// int main() {
+//     int arr[] = {2, 5, 6, 8, 10};
+//     int size = sizeof(arr) / sizeof(arr[0]);
+​
+//     bool allEven = every(arr, size, isEven);
+​
+//     if (allEven) {
+//         printf("All elements are even.\n");
+//     } else {
+//         printf("Not all elements are even.\n");
+//     }
+​
+//     return 0;
+// }
+​
+​
+// #include <stdio.h>
+// #include <stdlib.h>
+​
+// typedef int (*predicateFn)(int);
+​
+// int* filter(int* arr, int size, predicateFn predicate, int* resultSize) {
+//     int* result = (int*)malloc(size * sizeof(int));
+//     if (result == NULL) {
+//         printf("Memory Allocation Failed.\n");
+//         return NULL;
+//     }
+​
+//     int count = 0;
+//     for (int i = 0; i < size; i++) {
+//         if (predicate(arr[i])) {
+//             result[count] = arr[i];
+//             count++;
+//         }
+//     }
+​
+//     *resultSize = count;
+//     return result;
+// }
+​
+// int isEven(int num) {
+//     return num % 2 == 0;
+// }
+​
+// int main() {
+//     int arr[] = {1, 2, 3, 4, 5};
+//     int size = sizeof(arr) / sizeof(arr[0]);
+​
+//     int resultSize;
+//     int* filteredArr = filter(arr, size, isEven, &resultSize);
+​
+//     printf("Filtered Array: ");
+//     for (int i = 0; i < resultSize; i++) {
+//         printf("%d ", filteredArr[i]);
+//     }
+//     printf("\n");
+​
+//     free(filteredArr);
+​
+//     return 0;
+// }
+​
+​
+// #include <stdio.h>
+​
+// typedef void (*forEachFn)(int);
+​
+// void forEach(int* arr, int size, forEachFn callback) {
+//     for (int i = 0; i < size; i++) {
+//         callback(arr[i]);
+//     }
+// }
+​
+// void printElement(int element) {
+//     printf("%d ", element);
+// }
+​
+// int main() {
+//     int arr[] = {1, 2, 3, 4, 5};
+//     int size = sizeof(arr) / sizeof(arr[0]);
+​
+//     printf("Array Elements: ");
+//     forEach(arr, size, printElement);
+​
+//     return 0;
+// }
+​
+​
+// #include <stdio.h>
+​
+// int indexOf(int* arr, int size, int value) {
+//     for (int i = 0; i < size; i++) {
+//         if (arr[i] == value) {
+//             return i;
+//         }
+//     }
+//     return -1; // Value not found
+// }
+​
+// int main() {
+//     int arr[] = {1, 2, 3, 4, 5};
+//     int size = sizeof(arr) / sizeof(arr[0]);
+//     int value = 3;
+​
+//     int index = indexOf(arr, size, value);
+​
+//     if (index != -1) {
+//         printf("Value %d found at index %d\n", value, index);
+//     } else {
+//         printf("Value %d not found\n", value);
+//     }
+​
+//     return 0;
+// }
+​
+​
+// #include <stdio.h>
+​
+// int lastIndexOf(int* arr, int size, int value) {
+//     for (int i = size - 1; i >= 0; i--) {
+//         if (arr[i] == value) {
+//             return i;
+//         }
+//     }
+//     return -1; 
+// }
+​
+// int main() {
+//     int arr[] = {1, 2, 3, 4, 3, 5};
+//     int size = sizeof(arr) / sizeof(arr[0]);
+//     int value = 3;
+​
+//     int lastIndex = lastIndexOf(arr, size, value);
+​
+//     if (lastIndex != -1) {
+//         printf("Last occurrence of value %d found at index %d\n", value, lastIndex);
+//     } else {
+//         printf("Value %d not found\n", value);
+//     }
+​
+//     return 0;
+// }
+​
+​
+// #include <stdio.h>
+// #include <stdlib.h>
+​
+// typedef int (*mapFn)(int);
+​
+// int* map(int* arr, int size, mapFn callback) {
+//     int* mappedArr = (int*)malloc(size * sizeof(int));
+//     if (mappedArr == NULL) {
+//         printf("Memory Allocation Failed.\n");
+//         return NULL;
+//     }
+​
+//     for (int i = 0; i < size; i++) {
+//         mappedArr[i] = callback(arr[i]);
+//     }
+​
+//     return mappedArr;
+// }
+​
+// int square(int value) {
+//     return value * value;
+// }
+​
+// int main() {
+//     int arr[] = {1, 2, 3, 4, 5};
+//     int size = sizeof(arr) / sizeof(arr[0]);
+​
+//     int* squaredArr = map(arr, size, square);
+​
+//     printf("Mapped Array: ");
+//     for (int i = 0; i < size; i++) {
+//         printf("%d ", squaredArr[i]);
+//     }
+//     printf("\n");
+​
+//     free(squaredArr);
+​
+//     return 0;
+// }
+​
+​
+// #include <stdio.h>
+​
+// typedef int (*reduceFn)(int, int);
+​
+// int reduce(int* arr, int size, reduceFn callback, int initialValue) {
+//     int accumulator = initialValue;
+​
+//     for (int i = 0; i < size; i++) {
+//         accumulator = callback(accumulator, arr[i]);
+//     }
+​
+//     return accumulator;
+// }
+​
+// int sum(int accumulator, int currentValue) {
+//     return accumulator + currentValue;
+// }
+​
+// int main() {
+//     int arr[] = {1, 2, 3, 4, 5};
+//     int size = sizeof(arr) / sizeof(arr[0]);
+​
+//     int sumResult = reduce(arr, size, sum, 0);
+​
+//     printf("Sum: %d\n", sumResult);
+​
+//     return 0;
+// }
+​
+// #include <stdio.h>
+​
+// void reverse(int* arr, int size) {
+//     int left = 0;
+//     int right = size - 1;
+​
+//     while (left < right) {
+//         int temp = arr[left];
+//         arr[left] = arr[right];
+//         arr[right] = temp;
+//         left++;
+//         right--;
+//     }
+// }
+​
+// void printArray(int* arr, int size) {
+//     for (int i = 0; i < size; i++) {
+//         printf("%d ", arr[i]);
+//     }
+//     printf("\n");
+// }
+​
+// int main() {
+//     int arr[] = {1, 2, 3, 4, 5};
+//     int size = sizeof(arr) / sizeof(arr[0]);
+​
+//     printf("Original Array: ");
+//     printArray(arr, size);
+​
+//     reverse(arr, size);
+​
+//     printf("Reversed Array: ");
+//     printArray(arr, size);
+​
+//     return 0;
+// }
+​
+// #include <stdio.h>
+// #include <stdlib.h>
+​
+// int* slice(int* arr, int start, int end) {
+//     int size = end - start;
+//     int* slicedArr = (int*)malloc(size * sizeof(int));
+​
+//     if (slicedArr == NULL) {
+//         printf("Memory Allocation Failed.\n");
+//         return NULL;
+//     }
+​
+//     for (int i = 0; i < size; i++) {
+//         slicedArr[i] = arr[start + i];
+//     }
+​
+//     return slicedArr;
+// }
+​
+// void printArray(int* arr, int size) {
+//     for (int i = 0; i < size; i++) {
+//         printf("%d ", arr[i]);
+//     }
+//     printf("\n");
+// }
+​
+// int main() {
+//     int arr[] = {1, 2, 3, 4, 5};
+//     int size = sizeof(arr) / sizeof(arr[0]);
+​
+//     int start = 1;
+//     int end = 4;
+​
+//     int* slicedArr = slice(arr, start, end);
+​
+//     printf("Original Array: ");
+//     printArray(arr, size);
+​
+//     printf("Sliced Array: ");
+//     printArray(slicedArr, end - start);
+​
+//     free(slicedArr);
+​
+//     return 0;
+// }
+​
+​
+// #include <stdio.h>
+// #include <stdbool.h>
+​
+// typedef bool (*predicateFn)(int);
+​
+// bool some(int* arr, int size, predicateFn predicate) {
+//     for (int i = 0; i < size; i++) {
+//         if (predicate(arr[i])) {
+//             return true;
+//         }
+//     }
+​
+//     return false;
+// }
+​
+// bool isEven(int num) {
+//     return num % 2 == 0;
+// }
+​
+// int main() {
+//     int arr[] = {1, 2, 3, 4, 5};
+//     int size = sizeof(arr) / sizeof(arr[0]);
+​
+//     bool hasEven = some(arr, size, isEven);
+​
+//     if (hasEven) {
+//         printf("The array contains at least one even number.\n");
+//     } else {
+//         printf("The array does not contain any even number.\n");
+//     }
+​
+//     return 0;
+// }
+​
+​
+// #include <stdio.h>
+​
+// void sort(int arr[], int size) {
+//     for (int i = 0; i < size - 1; i++) {
+//         for (int j = 0; j < size - i - 1; j++) {
+//             if (arr[j] > arr[j + 1]) {
+//                 int temp = arr[j];
+//                 arr[j] = arr[j + 1];
+//                 arr[j + 1] = temp;
+//             }
+//         }
+//     }
+// }
+​
+// void printArray(int arr[], int size) {
+//     for (int i = 0; i < size; i++) {
+//         printf("%d ", arr[i]);
+//     }
+//     printf("\n");
+// }
+​
+// int main() {
+//     int arr[] = {5, 2, 8, 1, 3};
+//     int size = sizeof(arr) / sizeof(arr[0]);
+​
+//     printf("Original Array: ");
+//     printArray(arr, size);
+​
+//     sort(arr, size);
+​
+//     printf("Sorted Array: ");
+//     printArray(arr, size);
+​
+//     return 0;
+// }
+​
+// #include <stdio.h>
+// #include <stdlib.h>
+​
+// void fill(int* arr, int size, int value) {
+//     for (int i = 0; i < size; i++) {
+//         arr[i] = value;
+//     }
+// }
+​
+// void printArray(int* arr, int size) {
+//     for (int i = 0; i < size; i++) {
+//         printf("%d ", arr[i]);
+//     }
+//     printf("\n");
+// }
+​
+// int main() {
+//     int array[] = {1, 2, 3, 4, 5};
+//     int size = sizeof(array) / sizeof(array[0]);
+​
+//     // Fill the entire array with value 0
+//     fill(array, size, 0);
+//     printArray(array, size); // Output: 0 0 0 0 0
+​
+//     return 0;
+// }
+​
+​
+​
+// #include <stdio.h>
+// #include <stdbool.h>
+​
+// typedef bool (*predicateFn)(int);
+​
+// int find(int* arr, int size, predicateFn predicate) {
+//     for (int i = 0; i < size; i++) {
+//         if (predicate(arr[i])) {
+//             return arr[i];
+//         }
+//     }
+//     return -1; 
+// }
+​
+// bool isGreaterThanThree(int value) {
+//     return value > 3;
+// }
+​
+// int main() {
+//     int array[] = {1, 2, 3, 4, 5};
+//     int size = sizeof(array) / sizeof(array[0]);
+​
+//     int result = find(array, size, isGreaterThanThree);
+//     printf("%d\n", result); 
+​
+//     return 0;
+// }
+​
+// #include <stdio.h>
+// #include <stdbool.h>
+​
+// typedef bool (*predicateFn)(int);
+​
+// int findIndex(int* arr, int size, predicateFn predicate) {
+//     for (int i = 0; i < size; i++) {
+//         if (predicate(arr[i])) {
+//             return i;
+//         }
+//     }
+//     return -1; // Return -1 if no element satisfies the condition
+// }
+​
+// bool isGreaterThanThree(int value) {
+//     return value > 3;
+// }
+​
+// int main() {
+//     int array[] = {1, 2, 3, 4, 5};
+//     int size = sizeof(array) / sizeof(array[0]);
+​
+//     int result = findIndex(array, size, isGreaterThanThree);
+//     printf("%d\n", result); // Output: 3
+​
+//     return 0;
+// }
+​
+​
+​
+// #include <stdio.h>
+// #include <stdbool.h>
+​
+// typedef bool (*predicateFn)(int);
+​
+// int findLastIndex(int* arr, int size, predicateFn predicate) {
+//     for (int i = size - 1; i >= 0; i--) {
+//         if (predicate(arr[i])) {
+//             return i;
+//         }
+//     }
+//     return -1; 
+// }
+​
+// bool isGreaterThanThree(int value) {
+//     return value > 3;
+// }
+​
+// int main() {
+//     int array[] = {1, 2, 3, 4, 5};
+//     int size = sizeof(array) / sizeof(array[0]);
+​
+//     int result = findLastIndex(array, size, isGreaterThanThree);
+//     printf("%d\n", result); 
+​
+//     return 0;
+// }
+​
+​
+​
+​
+// #include <stdbool.h>
+​
+// bool includes(int* arr, int size, int target) {
+//     for (int i = 0; i < size; i++) {
+//         if (arr[i] == target) {
+//             return true;
+//         }
+//     }
+//     return false;
+// }
+​
+// int main() {
+//     int array[] = {1, 2, 3, 4, 5};
+//     int size = sizeof(array) / sizeof(array[0]);
+//     int target = 3;
+​
+//     bool result = includes(array, size, target);
+//     if (result) {
+//         printf("The array includes the target element.\n");
+//     } else {
+//         printf("The array does not include the target element.\n");
+//     }
+​
+//     return 0;
+// }
+​
+​
+// #include <stdio.h>
+// #include <stdlib.h>
+​
+// int* with(int* array, int size, int index, int value) {
+//     int* modifiedArray = (int*)malloc(size * sizeof(int));
+​
+//     if (modifiedArray == NULL) {
+//         printf("Memory Allocation Failed.\n");
+//         return NULL;
+//     }
+​
+//     for (int i = 0; i < size; i++) {
+//         if (i == index) {
+//             modifiedArray[i] = value;
+//         } else {
+//             modifiedArray[i] = array[i];
+//         }
+//     }
+​
+//     return modifiedArray;
+// }
+​
+// void printArray(int* array, int size) {
+//     for (int i = 0; i < size; i++) {
+//         printf("%d ", array[i]);
+//     }
+//     printf("\n");
+// }
+​
+// int main() {
+//     int array[] = {1, 2, 3, 4, 5};
+//     int size = sizeof(array) / sizeof(array[0]);
+​
+//     printf("Original Array: ");
+//     printArray(array, size);
+​
+//     int* modifiedArray = with(array, size, 2, 10);
+​
+//     if (modifiedArray != NULL) {
+//         printf("Modified Array: ");
+//         printArray(modifiedArray, size);
+​
+//         free(modifiedArray);
+//     }
+​
+//     return 0;
+// }
