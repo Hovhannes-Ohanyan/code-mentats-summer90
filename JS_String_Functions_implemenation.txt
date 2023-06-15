@@ -1,0 +1,643 @@
+// #include <stdio.h>
+// #include <string.h> 
+​
+// char at(const char* str, int index) {
+//     if (index >= 0 && index < strlen(str)) {
+//         return str[index];
+//     } else {
+//         // Return some error value when index is out of bounds
+//         return '\0';
+//     }
+// }
+​
+// int main() {
+//     const char* str = "Hello, world!";
+//     int index = 7;
+//     char result = at(str, index);
+​
+//     if (result != '\0') {
+//         printf("Character at index %d: %c\n", index, result);
+//     } else {
+//         printf("Invalid index\n");
+//     }
+​
+//     return 0;
+// }
+​
+​
+// #include <stdio.h>
+​
+// char charAt(const char* str, int index) {
+//     if (index >= 0 && str[index] != '\0') {
+//         return str[index];
+//     } else {
+//         return '\0';
+//     }
+// }
+​
+// int main() {
+//     const char* str = "Hello, world!";
+//     int index = 7;
+//     char result = charAt(str, index);
+​
+//     if (result != '\0') {
+//         printf("Character at index %d: %c\n", index, result);
+//     } else {
+//         printf("Invalid index\n");
+//     }
+​
+//     return 0;
+// }
+​
+​
+​
+// #include <stdio.h>
+​
+// int charCodeAt(const char* str, int index) {
+//     if (index >= 0 && str[index] != '\0') {
+//         return (unsigned char)str[index];
+//     } else {
+//         return -1;
+//     }
+// }
+​
+// int main() {
+//     const char* str = "Hello, world!";
+//     int index = 7;
+//     int result = charCodeAt(str, index);
+​
+//     if (result != -1) {
+//         printf("Character code at index %d: %d\n", index, result);
+//     } else {
+//         printf("Invalid index\n");
+//     }
+​
+//     return 0;
+// }
+​
+​
+​
+// #include <stdio.h>
+// #include <stdlib.h>
+// #include <string.h>
+​
+// char* concat(const char* str1, const char* str2) {
+//     size_t len1 = strlen(str1);
+//     size_t len2 = strlen(str2);
+//     char* result = (char*)malloc((len1 + len2 + 1) * sizeof(char));
+    
+//     if (result != NULL) {
+//         strcpy(result, str1);
+//         strcat(result, str2);
+//     }
+    
+//     return result;
+// }
+​
+// int main() {
+//     const char* str1 = "Hello, ";
+//     const char* str2 = "world!";
+//     char* result = concat(str1, str2);
+​
+//     if (result != NULL) {
+//         printf("Concatenated string: %s\n", result);
+//         free(result);  
+//     } else {
+//         printf("Error: Failed to concatenate strings\n");
+//     }
+​
+//     return 0;
+// }
+​
+// #include <stdio.h>
+// #include <stdbool.h>
+// #include <string.h>
+​
+// bool endsWith(const char* str, const char* suffix) {
+//     size_t str_len = strlen(str);
+//     size_t suffix_len = strlen(suffix);
+​
+//     if (suffix_len > str_len) {
+//         return false;
+//     }
+​
+//     const char* str_end = str + str_len - suffix_len;
+//     return strcmp(str_end, suffix) == 0;
+// }
+​
+// int main() {
+//     const char* str = "Hello, world!";
+//     const char* suffix = "world!";
+​
+//     if (endsWith(str, suffix)) {
+//         printf("String ends with '%s'\n", suffix);
+//     } else {
+//         printf("String does not end with '%s'\n", suffix);
+//     }
+​
+//     return 0;
+// }
+​
+​
+​
+// #include <stdio.h>
+// #include <stdbool.h>
+// #include <string.h>
+​
+// bool includes(const char* str, const char* substr) {
+//     return strstr(str, substr) != NULL;
+// }
+​
+// int main() {
+//     const char* str = "Hello, world!";
+//     const char* substr = "wold";
+​
+//     if (includes(str, substr)) {
+//         printf("String includes '%s'\n", substr);
+//     } else {
+//         printf("String does not include '%s'\n", substr);
+//     }
+​
+//     return 0;
+// }
+​
+​
+// #include <stdio.h>
+// #include <string.h>
+​
+// int indexOf(const char* str, const char* substr) {
+//     char* result = strstr(str, substr);
+    
+//     if (result != NULL) {
+//         return result - str;  
+//     } else {
+//         return -1;  
+//     }
+// }
+​
+// int main() {
+//     const char* str = "Hello, world!";
+//     const char* substr = "world";
+​
+//     int index = indexOf(str, substr);
+​
+//     if (index != -1) {
+//         printf("Substring '%s' found at index %d\n", substr, index);
+//     } else {
+//         printf("Substring '%s' not found\n", substr);
+//     }
+​
+//     return 0;
+// }
+​
+// #include <stdio.h>
+// #include <string.h>
+​
+// int lastIndexOf(const char* str, const char* substr) {
+//     int str_len = strlen(str);
+//     int substr_len = strlen(substr);
+​
+//     if (substr_len > str_len) {
+//         return -1;  
+//     }
+​
+//     for (int i = str_len - substr_len; i >= 0; i--) {
+//         if (strncmp(&str[i], substr, substr_len) == 0) {
+//             return i; 
+//         }
+//     }
+​
+//     return -1;  
+// }
+​
+// int main() {
+//     const char* str = "Hello, world!";
+//     const char* substr = "o";
+​
+//     int index = lastIndexOf(str, substr);
+​
+//     if (index != -1) {
+//         printf("Last occurrence of substring '%s' found at index %d\n", substr, index);
+//     } else {
+//         printf("Substring '%s' not found\n", substr);
+//     }
+​
+//     return 0;
+// }
+​
+// #include <stdio.h>
+// #include <stdlib.h>
+// #include <string.h>
+​
+// char* repeat(const char* str, int count) {
+//     int strLength = strlen(str);
+//     int repeatedLength = strLength * count;
+​
+//     char* repeatedString = (char*)malloc((repeatedLength + 1) * sizeof(char));
+​
+//     if (repeatedString != NULL) {
+//         for (int i = 0; i < count; i++) {
+//             memcpy(repeatedString + (i * strLength), str, strLength);
+//         }
+​
+//         repeatedString[repeatedLength] = '\0';
+//     }
+​
+//     return repeatedString;
+// }
+​
+// int main() {
+//     const char* str = "Hello";
+//     int count = 3;
+​
+//     char* repeatedStr = repeat(str, count);
+​
+//     if (repeatedStr != NULL) {
+//         printf("Repeated string: %s\n", repeatedStr);
+//         free(repeatedStr);  
+//     } else {
+//         printf("Error: Failed to repeat the string\n");
+//     }
+​
+//     return 0;
+// }
+​
+// #include <stdio.h>
+// #include <stdlib.h>
+// #include <string.h>
+​
+// char* slice(const char* str, int start, int end) {
+//     int strLength = strlen(str);
+//     int sliceLength = end - start;
+​
+//     if (start < 0) {
+//         start = strLength + start;
+//         if (start < 0) {
+//             start = 0;
+//         }
+//     }
+​
+//     if (end < 0) {
+//         end = strLength + end;
+//         if (end < 0) {
+//             end = 0;
+//         }
+//     }
+​
+//     if (start >= end || start >= strLength) {
+//         return strdup("");
+//     }
+​
+//     if (end > strLength) {
+//         end = strLength;
+//     }
+​
+//     char* slice = (char*)malloc((sliceLength + 1) * sizeof(char));
+​
+//     if (slice != NULL) {
+//         memcpy(slice, str + start, sliceLength);
+//         slice[sliceLength] = '\0';
+//     }
+​
+//     return slice;
+// }
+​
+// int main() {
+//     const char* str = "Hello, world!";
+//     int start = 7;
+//     int end = 12;
+​
+//     char* slicedStr = slice(str, start, end);
+​
+//     if (slicedStr != NULL) {
+//         printf("Sliced string: %s\n", slicedStr);
+//         free(slicedStr);  
+//     } else {
+//         printf("Error: Failed to slice the string\n");
+//     }
+​
+//     return 0;
+// }
+​
+​
+// #include <stdio.h>
+// #include <stdlib.h>
+// #include <string.h>
+​
+// char** split(const char* str, const char* delimiter, int* count) {
+//     char* strCopy = strdup(str); 
+//     char** substrings = NULL;
+//     *count = 0;
+​
+//     char* token = strtok(strCopy, delimiter);
+//     while (token != NULL) {
+//         (*count)++;
+//         substrings = (char**)realloc(substrings, *count * sizeof(char*));
+//         substrings[*count - 1] = strdup(token);
+//         token = strtok(NULL, delimiter);
+//     }
+​
+//     free(strCopy); 
+​
+//     return substrings;
+// }
+​
+// void freeSubstrings(char** substrings, int count) {
+//     for (int i = 0; i < count; i++) {
+//         free(substrings[i]);
+//     }
+//     free(substrings);
+// }
+​
+// int main() {
+//     const char* str = "Hello,world,how,are,you";
+//     const char* delimiter = ",";
+//     int count;
+​
+//     char** substrings = split(str, delimiter, &count);
+​
+//     if (substrings != NULL) {
+//         printf("Number of substrings: %d\n", count);
+//         for (int i = 0; i < count; i++) {
+//             printf("Substring %d: %s\n", i + 1, substrings[i]);
+//         }
+//         freeSubstrings(substrings, count); 
+//     } else {
+//         printf("Error: Failed to split the string\n");
+//     }
+​
+//     return 0;
+// }
+​
+// #include <stdio.h>
+// #include <stdbool.h>
+// #include <string.h>
+​
+// bool startsWith(const char* str, const char* prefix) {
+//     int strLength = strlen(str);
+//     int prefixLength = strlen(prefix);
+​
+//     if (prefixLength > strLength) {
+//         return false;
+//     }
+​
+//     return strncmp(str, prefix, prefixLength) == 0;
+// }
+​
+// int main() {
+//     const char* str = "Hello, world!";
+//     const char* prefix = "Hello";
+​
+//     bool result = startsWith(str, prefix);
+​
+//     if (result) {
+//         printf("String starts with the prefix\n");
+//     } else {
+//         printf("String does not start with the prefix\n");
+//     }
+​
+//     return 0;
+// }
+​
+// #include <stdio.h>
+// #include <stdlib.h>
+// #include <string.h>
+​
+// char* substring(const char* str, int start, int end) {
+//     int strLength = strlen(str);
+//     int substringLength = end - start;
+​
+//     if (start < 0) {
+//         start = 0;
+//     }
+​
+//     if (end < start || start >= strLength) {
+//         return strdup("");
+//     }
+​
+//     if (end > strLength) {
+//         end = strLength;
+//     }
+​
+//     char* substring = (char*)malloc((substringLength + 1) * sizeof(char));
+​
+//     if (substring != NULL) {
+//         memcpy(substring, str + start, substringLength);
+//         substring[substringLength] = '\0';
+//     }
+​
+//     return substring;
+// }
+​
+// int main() {
+//     const char* str = "Hello, world!";
+//     int start = 7;
+//     int end = 12;
+​
+//     char* sub = substring(str, start, end);
+​
+//     if (sub != NULL) {
+//         printf("Substring: %s\n", sub);
+//         free(sub);  
+//     } else {
+//         printf("Error: Failed to extract substring\n");
+//     }
+​
+//     return 0;
+// }
+​
+// #include <stdio.h>
+// #include <ctype.h>
+// #include <stdlib.h>
+// #include <string.h>
+​
+// char* toLowerCase(const char* str) {
+//     int length = strlen(str);
+//     char* lowercasedStr = (char*)malloc((length + 1) * sizeof(char));
+​
+//     if (lowercasedStr != NULL) {
+//         for (int i = 0; i < length; i++) {
+//             lowercasedStr[i] = tolower(str[i]);
+//         }
+//         lowercasedStr[length] = '\0';
+//     }
+​
+//     return lowercasedStr;
+// }
+​
+// int main() {
+//     const char* str = "Hello, World!";
+​
+//     char* lowercasedStr = toLowerCase(str);
+​
+//     if (lowercasedStr != NULL) {
+//         printf("Lowercased string: %s\n", lowercasedStr);
+//         free(lowercasedStr);  // Free the dynamically allocated memory
+//     } else {
+//         printf("Error: Failed to convert string to lowercase\n");
+//     }
+​
+//     return 0;
+// }
+​
+​
+// #include <stdio.h>
+// #include <ctype.h>
+// #include <stdlib.h>
+// #include <string.h>
+​
+// char* toUpperCase(const char* str) {
+//     int length = strlen(str);
+//     char* uppercasedStr = (char*)malloc((length + 1) * sizeof(char));
+​
+//     if (uppercasedStr != NULL) {
+//         for (int i = 0; i < length; i++) {
+//             uppercasedStr[i] = toupper(str[i]);
+//         }
+//         uppercasedStr[length] = '\0';
+//     }
+​
+//     return uppercasedStr;
+// }
+​
+// int main() {
+//     const char* str = "Hello, World!";
+​
+//     char* uppercasedStr = toUpperCase(str);
+​
+//     if (uppercasedStr != NULL) {
+//         printf("Uppercased string: %s\n", uppercasedStr);
+//         free(uppercasedStr);  
+//     } else {
+//         printf("Error: Failed to convert string to uppercase\n");
+//     }
+​
+//     return 0;
+// }
+​
+​
+// #include <stdio.h>
+// #include <ctype.h>
+// #include <stdlib.h>
+// #include <string.h>
+​
+// char* trimEnd(const char* str) {
+//     int length = strlen(str);
+​
+//     int numTrailingWhitespace = 0;
+//     for (int i = length - 1; i >= 0; i--) {
+//         if (isspace(str[i])) {
+//             numTrailingWhitespace++;
+//         } else {
+//             break;
+//         }
+//     }
+​
+//     int trimmedLength = length - numTrailingWhitespace;
+//     char* trimmedStr = (char*)malloc((trimmedLength + 1) * sizeof(char));
+​
+//     if (trimmedStr != NULL) {
+//         memcpy(trimmedStr, str, trimmedLength);
+//         trimmedStr[trimmedLength] = '\0';
+//     }
+​
+//     return trimmedStr;
+// }
+​
+// int main() {
+//     const char* str = "  Hello, World!    ";
+​
+//     char* trimmedStr = trimEnd(str);
+​
+//     if (trimmedStr != NULL) {
+//         printf("Trimmed string: %s\n", trimmedStr);
+//         free(trimmedStr);  
+//     } else {
+//         printf("Error: Failed to trim the string\n");
+//     }
+​
+//     return 0;
+// }
+​
+// #include <stdio.h>
+// #include <ctype.h>
+// #include <stdlib.h>
+// #include <string.h>
+​
+// char* trimStart(const char* str) {
+//     int length = strlen(str);
+//     int startIndex = 0;
+​
+//     while (startIndex < length && isspace(str[startIndex])) {
+//         startIndex++;
+//     }
+​
+//     int trimmedLength = length - startIndex;
+//     char* trimmedStr = (char*)malloc((trimmedLength + 1) * sizeof(char));
+​
+//     if (trimmedStr != NULL) {
+//         memcpy(trimmedStr, str + startIndex, trimmedLength);
+//         trimmedStr[trimmedLength] = '\0';
+//     }
+​
+//     return trimmedStr;
+// }
+​
+// int main() {
+//     const char* str = "    Hello, World!  ";
+​
+//     char* trimmedStr = trimStart(str);
+​
+//     if (trimmedStr != NULL) {
+//         printf("Trimmed string: %s\n", trimmedStr);
+//         free(trimmedStr);  
+//     } else {
+//         printf("Error: Failed to trim the string\n");
+//     }
+​
+//     return 0;
+// }
+​
+// #include <stdio.h>
+// #include <ctype.h>
+// #include <stdlib.h>
+// #include <string.h>
+​
+// char* trim(const char* str) {
+//     int length = strlen(str);
+//     int startIndex = 0;
+//     int endIndex = length - 1;
+​
+//     while (startIndex < length && isspace(str[startIndex])) {
+//         startIndex++;
+//     }
+​
+//     while (endIndex >= 0 && isspace(str[endIndex])) {
+//         endIndex--;
+//     }
+​
+//     int trimmedLength = endIndex - startIndex + 1;
+//     char* trimmedStr = (char*)malloc((trimmedLength + 1) * sizeof(char));
+​
+//     if (trimmedStr != NULL) {
+//         memcpy(trimmedStr, str + startIndex, trimmedLength);
+//         trimmedStr[trimmedLength] = '\0';
+//     }
+​
+//     return trimmedStr;
+// }
+​
+// int main() {
+//     const char* str = "    Hello, World!  ";
+​
+//     char* trimmedStr = trim(str);
+​
+//     if (trimmedStr != NULL) {
+//         printf("Trimmed string: %s\n", trimmedStr);
+//         free(trimmedStr);  
+//     } else {
+//         printf("Error: Failed to trim the string\n");
+//     }
+​
+//     return 0;
+// }
